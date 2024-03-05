@@ -19,28 +19,3 @@ app.post('/comments', (req, res) => {
 app.listen(3000, () => {
   console.log('Server is listening on port 3000');
 });
-
-// Path: comments.test.js
-const request = require('supertest');
-const app = require('./comments');
-
-describe('GET /comments', () => {
-  it('respond with json containing a list of all comments', (done) => {
-    request(app)
-      .get('/comments')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(200, done);
-  });
-});
-
-describe('POST /comments', () => {
-  it('respond with json', (done) => {
-    request(app)
-      .post('/comments')
-      .send({ username: 'test', comment: 'test' })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(200, done);
-  });
-});
